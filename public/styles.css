@@ -1,0 +1,327 @@
+:root {
+  --primary-color: #fc4c02; /* Couleur Strava */
+  --primary-dark: #e34402;
+  --secondary-color: #f7f7fa;
+  --text-color: #242428;
+  --light-text: #6d6d78;
+  --border-color: #dfdfe8;
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --success-color: #2dce89;
+  --warning-color: #fb6340;
+  --info-color: #11cdef;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: #f0f2f5;
+  background-image: linear-gradient(135deg, #f5f7fa 0%, #e4e8ef 100%);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header styles */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.logo i {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-right: 10px;
+}
+
+header h1 {
+  color: var(--primary-color);
+  font-size: 2.2rem;
+  margin: 0;
+}
+
+.subtitle {
+  color: var(--light-text);
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.sort-options {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.sort-button {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.sort-button i {
+  margin-right: 8px;
+}
+
+.sort-button:hover {
+  background-color: rgba(252, 76, 2, 0.1);
+  transform: translateY(-2px);
+}
+
+.sort-button.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(252, 76, 2, 0.3);
+}
+
+/* Card styles */
+.card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.card-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h2 {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.last-updated {
+  color: var(--light-text);
+  font-size: 0.9rem;
+}
+
+/* Loading and error styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(252, 76, 2, 0.2);
+  border-top: 5px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  background-color: rgba(251, 99, 64, 0.1);
+  color: var(--warning-color);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-message i {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background-color: #f8f9fa;
+  color: var(--text-color);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+tr:hover {
+  background-color: rgba(252, 76, 2, 0.05);
+}
+
+.athlete-info {
+  display: flex;
+  align-items: center;
+}
+
+.athlete-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+  object-fit: cover;
+  background-color: #f0f2f5;
+  border: 2px solid var(--border-color);
+}
+
+.athlete-name {
+  font-weight: 600;
+}
+
+.position {
+  font-weight: bold;
+  text-align: center;
+  width: 80px;
+}
+
+.position-1 {
+  color: #FFD700; /* Gold */
+}
+
+.position-2 {
+  color: #C0C0C0; /* Silver */
+}
+
+.position-3 {
+  color: #CD7F32; /* Bronze */
+}
+
+/* Badges for top positions */
+.position-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.position-1 .position-badge {
+  background-color: #FFD700;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(255, 215, 0, 0.5);
+}
+
+.position-2 .position-badge {
+  background-color: #C0C0C0;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(192, 192, 192, 0.5);
+}
+
+.position-3 .position-badge {
+  background-color: #CD7F32;
+  color: white;
+  box-shadow: 0 2px 5px rgba(205, 127, 50, 0.5);
+}
+
+/* Stats display */
+.stats {
+  display: flex;
+  align-items: center;
+}
+
+.stats i {
+  margin-right: 5px;
+  color: var(--primary-color);
+}
+
+/* Footer styles */
+footer {
+  margin-top: 40px;
+  text-align: center;
+  color: var(--light-text);
+  font-size: 14px;
+  padding: 20px;
+}
+
+.copyright {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  th, td {
+    padding: 10px 8px;
+  }
+  
+  .container {
+    padding: 10px;
+  }
+  
+  .sort-options {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .sort-button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  th:nth-child(4), td:nth-child(4) { /* Hide elevation column on mobile */
+    display: none;
+  }
+}
