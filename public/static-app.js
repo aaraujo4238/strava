@@ -15,8 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ID du fichier Google Drive
   const FILE_ID = '1fK3GBA-2Ii39RaVYRnmw4zVK89PQtaOt';
-  // URL de téléchargement direct pour Google Drive
+  
+  // URL pour accéder au fichier via un proxy CORS
+  // Utilise l'API cors-anywhere comme proxy
+  const PROXY_URL = 'https://corsproxy.io/?';
   const DRIVE_DOWNLOAD_URL = `https://drive.google.com/uc?export=download&id=${FILE_ID}`;
+  const PROXIED_URL = PROXY_URL + encodeURIComponent(DRIVE_DOWNLOAD_URL);
 
   // Fonction pour formater la date
   function formatDate(date) {
@@ -34,7 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fonction pour récupérer les données directement depuis Google Drive
   async function fetchActivities() {
     try {
-      const response = await fetch(DRIVE_DOWNLOAD_URL);
+      const response = await fetch(PROXIED_URL, {
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
       
       if (!response.ok) {
         throw new Error(`Erreur HTTP: ${response.status}`);
