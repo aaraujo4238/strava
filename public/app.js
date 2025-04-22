@@ -27,13 +27,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // Fonction pour récupérer les données de classement
   async function fetchRanking(sortBy = 'distance') {
     try {
-      // Obtenir le chemin de base de l'application
-      const basePath = window.location.pathname.endsWith('/') 
-        ? window.location.pathname 
-        : window.location.pathname + '/';
+      // Déterminer l'URL de l'API en fonction de l'environnement
+      let apiUrl;
       
-      // Construire l'URL de l'API en utilisant le chemin relatif
-      const apiUrl = `${basePath}api/ranking?sortBy=${sortBy}`;
+      // Vérifier si nous sommes sur Render ou en local
+      if (window.location.hostname === 'strava-o803.onrender.com') {
+        // Sur Render, utiliser le chemin absolu
+        apiUrl = '/api/ranking?sortBy=' + sortBy;
+      } else {
+        // En local ou autre environnement, utiliser le chemin relatif
+        const basePath = window.location.pathname.endsWith('/') 
+          ? window.location.pathname 
+          : window.location.pathname + '/';
+        apiUrl = `${basePath}api/ranking?sortBy=${sortBy}`;
+      }
       
       const response = await fetch(apiUrl);
       
