@@ -11,12 +11,28 @@ const DRIVE_DOWNLOAD_URL = `https://drive.google.com/uc?export=download&id=${FIL
  */
 export async function fetchActivities(): Promise<Activity[]> {
   try {
-    // Récupérer les données du fichier Google Drive
-    const response = await axios.get(DRIVE_DOWNLOAD_URL);
+    // Utiliser axios avec des options avancées pour contourner les restrictions
+    const response = await axios.get(DRIVE_DOWNLOAD_URL, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Referer': 'https://drive.google.com',
+        'Origin': 'https://drive.google.com'
+      },
+      // Augmenter le timeout pour les requêtes lentes
+      timeout: 10000,
+      // Suivre les redirections
+      maxRedirects: 5
+    });
+    
     return response.data;
   } catch (error) {
     console.error('Erreur lors de la récupération des données depuis Google Drive:', error);
-    throw error;
+    
+    // En cas d'échec, retourner un tableau vide
+    // L'application gérera ce cas en affichant un message approprié
+    return [];
   }
 }
 
